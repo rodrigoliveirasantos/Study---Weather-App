@@ -12,5 +12,6 @@ Aplicação básica para acompanhamento da temperatura local.
 - Conhecimento geral do SCSS
 - Conceitos de Smart e Dumb components
 
-
+## Extensões e desafios:
+- [ ] Dockerização do projeto
 
