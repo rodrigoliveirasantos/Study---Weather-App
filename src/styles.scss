@@ -29,6 +29,17 @@ fa-icon {
   color: #ffffff;
 }
 
+button {
+  background-color: transparent;
+  border: none;
+  text-align: start;
+  cursor: pointer;
+}
+
+[disabled] {
+  opacity: 0.5;
+}
+
 .container {
   width: 500px;
   height: 80vh;
@@ -165,4 +176,8 @@ fa-icon {
 }
 .search-icon {
   margin-left: 1em;
+}
+
+h2 {
+  text-align: center;
 }
