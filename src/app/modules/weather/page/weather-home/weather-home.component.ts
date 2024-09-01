@@ -1,21 +1,15 @@
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 import { WeatherService } from '../../services/weather.service';
-import { BehaviorSubject, combineLatest, map, ReplaySubject, Subject, switchMap, takeUntil, tap } from 'rxjs';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { Subject, switchMap, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-weather-home',
   templateUrl: './weather-home.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WeatherHomeComponent implements OnDestroy {
   private _weatherService = inject(WeatherService);
 
-  formData = {
-    cityName: '',
-  }
-  searchIcon = faMagnifyingGlass;
+  cityName = '';
 
   submit$ = new Subject<string>();
   destroy$ = new Subject<void>();
@@ -28,16 +22,12 @@ export class WeatherHomeComponent implements OnDestroy {
   );
 
   handleSubmit() {
-    this.submit$.next(this.formData.cityName);
-    this.reset();
-  }
-
-  reset() {
-    this.formData.cityName = '';
+    this.submit$.next(this.cityName);
   }
 
   ngOnDestroy(): void {
     this.destroy$.next();
+    this.submit$.complete();
     this.destroy$.complete();
   }
 }

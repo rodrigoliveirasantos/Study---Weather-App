@@ -1,17 +1,7 @@
-<div class="search">
-  <form (submit)="handleSubmit()">
-    <input
-      type="text"
-      [(ngModel)]="formData.cityName"
-      name="cityname"
-      placeholder="Sua cidade"
-    />
-
-    <button type="submit" [disabled]="!formData.cityName">
-      <fa-icon [icon]="searchIcon" size="lg" class="search-icon"></fa-icon>
-    </button>
-  </form>
-</div>
+<app-weather-form
+  [(cityName)]="cityName"
+  (onSubmit)="handleSubmit()"
+></app-weather-form>
 
 <div *ngIf="weatherData$ | async as weatherData">
   <h2>{{ weatherData.name }} - {{ weatherData.sys.country }}</h2>
