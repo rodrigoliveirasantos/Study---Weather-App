@@ -13,6 +13,6 @@ Aplicação básica para acompanhamento da temperatura local.
 - Conceitos de Smart e Dumb components
 
 ## Extensões e desafios:
-- [ ] Dockerização do projeto
+- [x] Dockerização do projeto
 - [ ] Tornar o código mais declarativo usando RxJS
 - [ ] Integração com o Geolocation API do Javascript

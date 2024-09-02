@@ -1,0 +1,9 @@
+services:
+  weather-app:
+    build: .
+    container_name: weather-app
+    ports:
+      - '4200:4200'
+    volumes:
+      - '.:/app'
+      - '/app/node_modules'
