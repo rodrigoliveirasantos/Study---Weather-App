@@ -10,17 +10,6 @@ import { WeatherReport } from 'src/app/models/interface/weather';
 export class WeatherCardComponent {
   @Input() weatherReport!: WeatherReport;
 
-  /* Imagens */
-
-  sunImg = {
-    src: '/assets/img/sun.jpg',
-    alt: 'Céu claro e ensolarado.'
-  };
-  coldImg = {
-    src: '/assets/img/cold.jpg',
-    alt: 'Floresta com pinheiros. Gramados e árvore estão cobertos por neve.'
-  }
-
   /* Icones */
   minTempIcon = faTemperatureLow;
   maxTempIcon = faTemperatureHigh;

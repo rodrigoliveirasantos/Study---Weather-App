@@ -1,0 +1,14 @@
+<div class="upper-data">
+  <img *ngIf="temp > 15" [src]="sunImg.src" [alt]="sunImg.alt" />
+  <img *ngIf="temp <= 15" [src]="coldImg.src" [alt]="coldImg.alt" />
+
+  <div class="weather-data">
+    <h2>
+      <div class="location">
+        {{ cityName }}
+      </div>
+      <div class="temperature">{{ temp | number : "1.0-0" }}˚C</div>
+    </h2>
+    <small class="feels-like"> Sensação térmica: {{ tempFeelsLike }}˚C </small>
+  </div>
+</div>
