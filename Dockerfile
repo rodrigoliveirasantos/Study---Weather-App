@@ -6,7 +6,7 @@ WORKDIR /app
 COPY package.json /app/package.json
 
 RUN npm install
-RUN npm install @angular/cli -g
+RUN npm install @angular/cli@15 -g
 
 COPY . /app
 
