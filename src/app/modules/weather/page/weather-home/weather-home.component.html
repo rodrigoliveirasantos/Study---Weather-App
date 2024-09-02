@@ -1,8 +1,20 @@
-<app-weather-form
-  [(cityName)]="cityName"
-  (onSubmit)="handleSubmit()"
-></app-weather-form>
+<ng-container *ngIf="vm$ | async as vm">
+  <app-weather-form
+    [(cityName)]="cityName"
+    (onSubmit)="handleSubmit()"
+  ></app-weather-form>
 
-<div *ngIf="weatherData$ | async as weatherData">
-  <h2>{{ weatherData.name }} - {{ weatherData.sys.country }}</h2>
-</div>
+  <ng-container *ngIf="!vm.loading; else loader">
+    <div *ngIf="vm.submitted && !vm.weatherData">
+      Sem dados para esta cidade
+    </div>
+
+    <div *ngIf="vm.weatherData">
+      <h2>{{ vm.weatherData.name }} - {{ vm.weatherData.sys.country }}</h2>
+    </div>
+  </ng-container>
+</ng-container>
+
+<ng-template #loader>
+  <div>Carregando...</div>
+</ng-template>

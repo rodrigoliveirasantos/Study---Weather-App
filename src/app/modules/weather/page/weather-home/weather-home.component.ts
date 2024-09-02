@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 import { WeatherService } from '../../services/weather.service';
-import { Subject, switchMap, takeUntil } from 'rxjs';
+import { combineLatest, map, merge, startWith, Subject, switchMap, take, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-weather-home',
@@ -12,22 +12,29 @@ export class WeatherHomeComponent implements OnDestroy {
   cityName = '';
 
   submit$ = new Subject<string>();
-  destroy$ = new Subject<void>();
 
   weatherData$ = this.submit$.pipe(
-    takeUntil(this.destroy$),
     switchMap((cityName) => {
       return this._weatherService.getWeatherData(cityName);
     }),
   );
+
+  loadingWeatherData$ = merge(
+    this.submit$.pipe(map(() => true)),
+    this.weatherData$.pipe(map(() => false))
+  );
+
+  vm$ = combineLatest({
+    weatherData: this.weatherData$.pipe(startWith(false as const)),
+    loading: this.loadingWeatherData$.pipe(startWith(false)),
+    submitted: this.submit$.pipe(map(() => true), take(1), startWith(false))
+  })
 
   handleSubmit() {
     this.submit$.next(this.cityName);
   }
 
   ngOnDestroy(): void {
-    this.destroy$.next();
     this.submit$.complete();
-    this.destroy$.complete();
   }
 }
