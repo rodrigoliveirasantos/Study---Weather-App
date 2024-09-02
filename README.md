@@ -14,8 +14,8 @@ Aplicação básica para acompanhamento da temperatura local.
 
 ## Extensões e desafios:
 - [x] Dockerização do projeto
-- [ ] Tornar o código mais declarativo usando RxJS
-- [ ] Integração com o Geolocation API do Javascript
+- [X] Tornar o código mais declarativo usando RxJS
+- [X] Integração com o Geolocation API do Javascript
 
 ## Pré-requisitos:
 1. Node v18.20.4

@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
 
 
 type WeatherDataQuery = {
-  city?: string,
+  cityName?: string,
   latlon?: [number, number]
 }
 
@@ -38,8 +38,8 @@ export class WeatherService {
       params = params
         .append('lat', query.latlon[0])
         .append('lon', query.latlon[1]);
-    } else if (query.city) {
-      params = params.append('q', query.city);
+    } else if (query.cityName) {
+      params = params.append('q', query.cityName);
     }
 
     return this._http.get<WeatherReport>(url, {

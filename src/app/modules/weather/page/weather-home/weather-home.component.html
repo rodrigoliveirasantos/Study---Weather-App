@@ -4,6 +4,8 @@
     (onSubmit)="handleSubmit()"
   ></app-weather-form>
 
+  <button (click)="getCoords()">Buscar na minha localização</button>
+
   <ng-container *ngIf="!vm.loading; else loader">
     <div *ngIf="vm.submitted && !vm.weatherData">
       Sem dados para esta cidade
