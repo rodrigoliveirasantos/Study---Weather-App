@@ -9,37 +9,33 @@
     <div class="more-info-label">Mais informações</div>
 
     <div class="more-info-container">
-      <div class="info-block">
-        <div class="info-block-label">
-          <fa-icon size="lg" [icon]="minTempIcon"></fa-icon>
-          <span>Mínima</span>
-        </div>
-        <div class="info-block-value">{{ weatherReport.main.temp_min }}˚C</div>
-      </div>
+      <app-weather-card-info
+        label="Mínima"
+        [icon]="minTempIcon"
+        [value]="weatherReport.main.temp_min | temperature : 2"
+        class="info-block"
+      ></app-weather-card-info>
 
-      <div class="info-block">
-        <div class="info-block-label">
-          <fa-icon size="lg" [icon]="maxTempIcon"></fa-icon>
-          <span>Máxima</span>
-        </div>
-        <div class="info-block-value">{{ weatherReport.main.temp_min }}˚C</div>
-      </div>
+      <app-weather-card-info
+        label="Máxima"
+        [icon]="maxTempIcon"
+        [value]="weatherReport.main.temp_max | temperature : 2"
+        class="info-block"
+      ></app-weather-card-info>
 
-      <div class="info-block">
-        <div class="info-block-label">
-          <fa-icon size="lg" [icon]="humidityIcon"></fa-icon>
-          <span>Umidade</span>
-        </div>
-        <div class="info-block-value">{{ weatherReport.main.humidity }}</div>
-      </div>
+      <app-weather-card-info
+        label="Umidade"
+        [icon]="minTempIcon"
+        [value]="weatherReport.main.humidity"
+        class="info-block"
+      ></app-weather-card-info>
 
-      <div class="info-block">
-        <div class="info-block-label">
-          <fa-icon size="lg" [icon]="windIcon"></fa-icon>
-          <span>Vento</span>
-        </div>
-        <div class="info-block-value">{{ weatherReport.wind.speed }} km/h</div>
-      </div>
+      <app-weather-card-info
+        label="Vento"
+        [icon]="windIcon"
+        [value]="weatherReport.wind.speed"
+        class="info-block"
+      ></app-weather-card-info>
     </div>
   </div>
 </div>

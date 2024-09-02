@@ -11,6 +11,8 @@ import { WeatherHomeComponent } from './modules/weather/page/weather-home/weathe
 import { WeatherFormComponent } from './modules/weather/components/weather-form/weather-form.component';
 import { WeatherCardComponent } from './modules/weather/components/weather-card/weather-card.component';
 import { WeatherCardHeaderComponent } from './modules/weather/components/weather-card-header/weather-card-header.component';
+import { WeatherCardInfoComponent } from './modules/weather/components/weather-card-info/weather-card-info.component';
+import { TemperaturePipe } from './modules/shared/pipes/temperature/temperature.pipe';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { WeatherCardHeaderComponent } from './modules/weather/components/weather
     WeatherHomeComponent,
     WeatherFormComponent,
     WeatherCardComponent,
-    WeatherCardHeaderComponent
+    WeatherCardHeaderComponent,
+    WeatherCardInfoComponent,
+    TemperaturePipe,
   ],
   imports: [
     BrowserModule,
