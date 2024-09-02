@@ -14,4 +14,5 @@ Aplicação básica para acompanhamento da temperatura local.
 
 ## Extensões e desafios:
 - [ ] Dockerização do projeto
+- [ ] Tornar o código mais declarativo usando RxJS
 
