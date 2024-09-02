@@ -1,28 +1,42 @@
-import { ChangeDetectionStrategy, Component, inject, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { Component, inject, OnDestroy } from '@angular/core';
 import { WeatherService } from '../../services/weather/weather.service';
-import { combineLatest, map, merge, share, shareReplay, startWith, Subject, switchMap, take, takeUntil } from 'rxjs';
+import { combineLatest, filter, map, merge, share, shareReplay, startWith, Subject, switchMap, takeUntil } from 'rxjs';
 import { GeolocationService } from '../../services/geolocation/geolocation.service';
+import { GeolocationGetPositionResult } from 'src/app/models/classes/GeolocationGetPositionResult';
 
 @Component({
   selector: 'app-weather-home',
   templateUrl: './weather-home.component.html',
 })
 export class WeatherHomeComponent implements OnDestroy {
+  readonly notFoundErrorMsg = 'Não foram encontradas dados nesta região. Verifique se o nome está correto ou busque por uma outra cidade próxima.';
+  readonly positionPermissionErrorMsg = 'Não há permissões para buscar sua localização. Conceda permissão para acessar o local e tente novamente.';
+  readonly positionUnavailableErrorMsg = 'O sinal de GPS não consegue alcançar sua posição no momento.'
+  readonly positionMissingErrorMsg = 'O seu dispositivo não suporta busca a partir do GPS.';
+
   private _weatherService = inject(WeatherService);
   private _geolocationService = inject(GeolocationService);
 
   cityName = '';
 
   submit$ = new Subject<string>();
-  coords$ = new Subject<[number, number]>();
+  coordsBtnEvent$ = new Subject<void>();
+
+  position$ = this.coordsBtnEvent$.pipe(
+    switchMap(() => this.getPosition()),
+    share()
+  );
 
   weatherDataQuery$ = merge(
     this.submit$.pipe(map((cityName) => {
       return { cityName }
     })),
-    this.coords$.pipe(map((latlon) => {
-      return { latlon }
-    }))
+    this.position$.pipe(
+      filter((position) => position.success),
+      map(({ latlon }) => {
+        return { latlon }
+      })
+    )
   )
 
   weatherData$ = this.weatherDataQuery$.pipe(
@@ -37,24 +51,48 @@ export class WeatherHomeComponent implements OnDestroy {
     this.weatherData$.pipe(map(() => false))
   );
 
+  error$ = merge(
+    this.weatherData$.pipe(
+      map((data) => data ? '' : this.notFoundErrorMsg)
+    ),
+
+    this.position$.pipe(
+      filter((position) => !position.success),
+      map(({ code }) => {
+        return this.getPossitionErrorMessage(code)
+      })
+    )
+  )
+
   vm$ = combineLatest({
     weatherData: this.weatherData$.pipe(startWith(false as const)),
     loading: this.loadingWeatherData$.pipe(startWith(false)),
-    submitted: this.weatherDataQuery$.pipe(map(() => true), take(1), startWith(false))
+    error: this.error$.pipe(startWith(''))
   });
 
-  getCoords() {
-    this._geolocationService.getPosition().pipe(
-      takeUntil(this.submit$),
-    ).subscribe((location) => {
-      if (location instanceof GeolocationPosition) {
-        this.coords$.next([location.coords.latitude, location.coords.longitude])
-      }
-    })
+  handleCoordsBtnClick() {
+    this.coordsBtnEvent$.next();
   }
 
   handleSubmit() {
     this.submit$.next(this.cityName);
+  }
+
+  getPosition() {
+    return this._geolocationService.getPosition().pipe(
+      takeUntil(this.submit$),
+      map((position) => {
+        return position
+      }),
+    )
+  }
+
+  getPossitionErrorMessage(code: number) {
+    switch (code) {
+      case (GeolocationGetPositionResult.codes.PERMISSION_DENIED): return this.positionPermissionErrorMsg;
+      case (GeolocationGetPositionResult.codes.POSITION_UNAVAILABLE): return this.positionUnavailableErrorMsg;
+      default: return this.positionMissingErrorMsg;
+    }
   }
 
   ngOnDestroy(): void {
