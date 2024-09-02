@@ -9,9 +9,10 @@
       Sem dados para esta cidade
     </div>
 
-    <div *ngIf="vm.weatherData">
-      <h2>{{ vm.weatherData.name }} - {{ vm.weatherData.sys.country }}</h2>
-    </div>
+    <app-weather-card
+      *ngIf="vm.weatherData"
+      [weatherReport]="vm.weatherData"
+    ></app-weather-card>
   </ng-container>
 </ng-container>
 

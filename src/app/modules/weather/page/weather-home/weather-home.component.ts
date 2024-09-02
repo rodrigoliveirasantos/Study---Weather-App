@@ -28,7 +28,11 @@ export class WeatherHomeComponent implements OnDestroy {
     weatherData: this.weatherData$.pipe(startWith(false as const)),
     loading: this.loadingWeatherData$.pipe(startWith(false)),
     submitted: this.submit$.pipe(map(() => true), take(1), startWith(false))
-  })
+  });
+
+  ngAfterViewInit() {
+    this.submit$.next('Niteroi');
+  }
 
   handleSubmit() {
     this.submit$.next(this.cityName);

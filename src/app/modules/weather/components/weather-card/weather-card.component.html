@@ -1,0 +1,61 @@
+<div class="container" *ngIf="weatherReport">
+  <div class="upper-data">
+    <img
+      *ngIf="weatherReport.main.temp > 15"
+      [src]="sunImg.src"
+      [alt]="sunImg.alt"
+    />
+    <img
+      *ngIf="weatherReport.main.temp <= 15"
+      [src]="coldImg.src"
+      [alt]="coldImg.alt"
+    />
+
+    <h2 class="weather-data">
+      <div class="location">
+        {{ weatherReport.name }}
+      </div>
+      <div class="temperature">
+        {{ weatherReport.main.temp | number : "1.0-0" }}˚C
+      </div>
+    </h2>
+  </div>
+
+  <div class="lower-data">
+    <div class="more-info-label">Mais informações</div>
+
+    <div class="more-info-container">
+      <div class="info-block">
+        <div class="info-block-label">
+          <fa-icon size="lg" [icon]="minTempIcon"></fa-icon>
+          <span>Mínima</span>
+        </div>
+        <div class="info-block-value">{{ weatherReport.main.temp_min }}˚C</div>
+      </div>
+
+      <div class="info-block">
+        <div class="info-block-label">
+          <fa-icon size="lg" [icon]="maxTempIcon"></fa-icon>
+          <span>Máxima</span>
+        </div>
+        <div class="info-block-value">{{ weatherReport.main.temp_min }}˚C</div>
+      </div>
+
+      <div class="info-block">
+        <div class="info-block-label">
+          <fa-icon size="lg" [icon]="humidityIcon"></fa-icon>
+          <span>Umidade</span>
+        </div>
+        <div class="info-block-value">{{ weatherReport.main.humidity }}</div>
+      </div>
+
+      <div class="info-block">
+        <div class="info-block-label">
+          <fa-icon size="lg" [icon]="windIcon"></fa-icon>
+          <span>Vento</span>
+        </div>
+        <div class="info-block-value">{{ weatherReport.wind.speed }} km/h</div>
+      </div>
+    </div>
+  </div>
+</div>
