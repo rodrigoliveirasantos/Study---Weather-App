@@ -23,6 +23,7 @@ export class WeatherService {
 
   constructor() { }
 
+
   public getWeatherData(query: WeatherDataQuery): Observable<WeatherReport | false> {
     const url = `${this._apiBaseUrl}/weather`;
 
@@ -31,6 +32,7 @@ export class WeatherService {
         appid: this._apiKey,
         units: "metric",
         mode: "json",
+        lang: 'pt_br'
       }
     });
 

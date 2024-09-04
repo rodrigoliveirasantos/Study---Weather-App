@@ -1,9 +1,10 @@
 import { Component, inject, OnDestroy } from '@angular/core';
 import { WeatherService } from '../../services/weather/weather.service';
-import { combineLatest, filter, map, merge, share, shareReplay, startWith, Subject, switchMap, takeUntil } from 'rxjs';
+import { combineLatest, filter, map, merge, share, shareReplay, startWith, Subject, switchMap, takeUntil, tap } from 'rxjs';
 import { GeolocationService } from '../../services/geolocation/geolocation.service';
 import { GeolocationGetPositionResult } from 'src/app/models/classes/GeolocationGetPositionResult';
 import { faLocation, faLocationPin, faMapPin } from '@fortawesome/free-solid-svg-icons';
+import { WeatherReport } from 'src/app/models/interface/weather';
 
 @Component({
   selector: 'app-weather-home',
@@ -50,6 +51,11 @@ export class WeatherHomeComponent implements OnDestroy {
     shareReplay(1)
   );
 
+  theme$ = this.weatherData$.pipe(
+    map((report) => report ? this.getTheme(report) : ''),
+    tap(console.log)
+  );
+
   loadingWeatherData$ = merge(
     this.weatherDataQuery$.pipe(map(() => true)),
     this.weatherData$.pipe(map(() => false))
@@ -71,7 +77,8 @@ export class WeatherHomeComponent implements OnDestroy {
   vm$ = combineLatest({
     weatherData: this.weatherData$.pipe(startWith(false as const)),
     loading: this.loadingWeatherData$.pipe(startWith(false)),
-    error: this.error$.pipe(startWith(''))
+    error: this.error$.pipe(startWith('')),
+    theme: this.theme$.pipe(startWith(''))
   });
 
   handleCoordsBtnClick() {
@@ -97,6 +104,38 @@ export class WeatherHomeComponent implements OnDestroy {
       case (GeolocationGetPositionResult.codes.PERMISSION_DENIED): return this.positionPermissionErrorMsg;
       case (GeolocationGetPositionResult.codes.POSITION_UNAVAILABLE): return this.positionUnavailableErrorMsg;
       default: return this.positionMissingErrorMsg;
+    }
+  }
+
+  getTheme({ weather }: WeatherReport) {
+    console.log(weather[0].main);
+    switch (weather[0].main) {
+      case 'Ash':
+      case 'Fog':
+      case 'Mist':
+      case 'Dust':
+      case 'Sand':
+      case 'Smoke':
+        return 'Fog';
+
+      case 'Clouds':
+        return 'Clouds';
+
+      case 'Rain':
+      case 'Drizzle':
+        return 'Rain';
+
+      case 'Snow':
+        return 'Snow';
+
+      case 'Thunderstorm':
+      case 'Squall':
+        return 'Thunderstorm'
+
+      case 'Clear':
+      case 'Tornado':
+      default:
+        return 'Clear';
     }
   }
 
