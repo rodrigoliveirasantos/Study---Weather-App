@@ -4,7 +4,6 @@ import { NgModule, Pipe, PipeTransform } from '@angular/core';
   name: 'temperature'
 })
 export class TemperaturePipe implements PipeTransform {
-
   transform(value: string | number, decimals = 0): any {
     return Number(value).toFixed(decimals) + "˚C";
   }
@@ -12,8 +11,8 @@ export class TemperaturePipe implements PipeTransform {
 
 
 @NgModule({
-  declarations: [],
+  declarations: [TemperaturePipe],
   imports: [],
-  exports: []
+  exports: [TemperaturePipe]
 })
 export class TemperaturePipeModule { }
