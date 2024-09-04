@@ -9,6 +9,7 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 export class WeatherFormComponent {
   @Input() cityName!: string;
   @Output() cityNameChange = new EventEmitter<string>();
+  @Output() onSubmit = new EventEmitter<void>();
 
   searchIcon = faMagnifyingGlass;
 
@@ -19,6 +20,7 @@ export class WeatherFormComponent {
   }
 
   handleSubmit() {
+    this.onSubmit.emit();
     this.reset();
   }
 

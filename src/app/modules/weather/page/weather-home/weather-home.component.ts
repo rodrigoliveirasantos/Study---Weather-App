@@ -74,15 +74,12 @@ export class WeatherHomeComponent implements OnDestroy {
     error: this.error$.pipe(startWith(''))
   });
 
-  ngAfterViewInit() {
-    this.submit$.next('niteroi');
-  }
-
   handleCoordsBtnClick() {
     this.coordsBtnEvent$.next();
   }
 
   handleSubmit() {
+    console.log(this.cityName)
     this.submit$.next(this.cityName);
   }
 
