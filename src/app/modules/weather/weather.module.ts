@@ -10,6 +10,7 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { ButtonComponentModule } from "../shared/components/button/button.component";
 import { TemperaturePipeModule } from "../shared/pipes/temperature/temperature.pipe";
 import { CommonModule } from "@angular/common";
+import { WeatherBgComponent } from "./components/weather-bg/weather-bg.component";
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { CommonModule } from "@angular/common";
     WeatherCardComponent,
     WeatherCardHeaderComponent,
     WeatherCardInfoComponent,
+    WeatherBgComponent
   ],
   imports: [
     CommonModule,

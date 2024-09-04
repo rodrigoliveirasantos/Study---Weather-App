@@ -51,16 +51,6 @@ export class WeatherHomeComponent implements OnDestroy {
     shareReplay(1)
   );
 
-  theme$ = this.weatherData$.pipe(
-    map((report) => report ? this.getTheme(report) : ''),
-    tap(console.log)
-  );
-
-  loadingWeatherData$ = merge(
-    this.weatherDataQuery$.pipe(map(() => true)),
-    this.weatherData$.pipe(map(() => false))
-  );
-
   error$ = merge(
     this.weatherData$.pipe(
       map((data) => data ? '' : this.notFoundErrorMsg)
@@ -74,11 +64,24 @@ export class WeatherHomeComponent implements OnDestroy {
     )
   )
 
+  condition$ = merge(
+    this.error$.pipe(map(() => '')),
+    this.weatherData$.pipe(
+      map((report) => report ? this.getCondition(report) : ''),
+      tap(console.log)
+    )
+  )
+
+  loadingWeatherData$ = merge(
+    this.weatherDataQuery$.pipe(map(() => true)),
+    this.weatherData$.pipe(map(() => false))
+  );
+
   vm$ = combineLatest({
     weatherData: this.weatherData$.pipe(startWith(false as const)),
     loading: this.loadingWeatherData$.pipe(startWith(false)),
     error: this.error$.pipe(startWith('')),
-    theme: this.theme$.pipe(startWith(''))
+    condition: this.condition$.pipe(startWith(''))
   });
 
   handleCoordsBtnClick() {
@@ -107,8 +110,7 @@ export class WeatherHomeComponent implements OnDestroy {
     }
   }
 
-  getTheme({ weather }: WeatherReport) {
-    console.log(weather[0].main);
+  getCondition({ weather }: WeatherReport) {
     switch (weather[0].main) {
       case 'Ash':
       case 'Fog':

@@ -1,0 +1,14 @@
+<ng-container *ngIf="condition$ | async as condition">
+  <div
+    *ngFor="let bg of bgByCondition | keyvalue"
+    [style.background]="
+      'linear-gradient(169.71deg,' +
+      bg.value[0] +
+      ' 0.7%,' +
+      bg.value[1] +
+      ' 97.6%)'
+    "
+    [style.opacity]="bg.key === condition ? 1 : 0"
+    [style.visibility]="bg.key === condition ? 'visible' : 'hidden'"
+  ></div>
+</ng-container>
