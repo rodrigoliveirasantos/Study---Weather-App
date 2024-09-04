@@ -1,0 +1,36 @@
+@use 'config';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: config.$font-family;
+  background-color: config.$clr-background;
+  color: config.$clr-foreground;
+  font-optical-sizing: auto;
+  font-variation-settings:
+    "wdth" 100,
+    "YTLC" 500;
+  font-size: 1.4rem;
+}
+
+button,
+input {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  text-align: start;
+  cursor: pointer;
+}

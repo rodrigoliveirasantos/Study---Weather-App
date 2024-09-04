@@ -1,15 +1,13 @@
-<div class="search">
-  <form (submit)="handleSubmit()">
-    <input
-      type="text"
-      [ngModel]="cityName"
-      (ngModelChange)="handleChange($event)"
-      name="cityname"
-      placeholder="Digite o nome da cidade"
-    />
+<form (submit)="handleSubmit()">
+  <input
+    type="text"
+    [ngModel]="cityName"
+    (ngModelChange)="handleChange($event)"
+    name="cityname"
+    placeholder="Digite o nome da cidade"
+  />
 
-    <button type="submit" [disabled]="!cityName">
-      <fa-icon [icon]="searchIcon" size="lg" class="search-icon"></fa-icon>
-    </button>
-  </form>
-</div>
+  <button type="submit" [disabled]="!cityName">
+    <fa-icon [icon]="searchIcon" size="lg" class="search-icon"></fa-icon>
+  </button>
+</form>

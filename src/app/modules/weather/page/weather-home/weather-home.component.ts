@@ -3,16 +3,20 @@ import { WeatherService } from '../../services/weather/weather.service';
 import { combineLatest, filter, map, merge, share, shareReplay, startWith, Subject, switchMap, takeUntil } from 'rxjs';
 import { GeolocationService } from '../../services/geolocation/geolocation.service';
 import { GeolocationGetPositionResult } from 'src/app/models/classes/GeolocationGetPositionResult';
+import { faLocation, faLocationPin, faMapPin } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-weather-home',
   templateUrl: './weather-home.component.html',
+  styleUrls: ["./weather-home.component.scss"]
 })
 export class WeatherHomeComponent implements OnDestroy {
   readonly notFoundErrorMsg = 'Não foram encontradas dados nesta região. Verifique se o nome está correto ou busque por uma outra cidade próxima.';
   readonly positionPermissionErrorMsg = 'Não há permissões para buscar sua localização. Conceda permissão para acessar o local e tente novamente.';
   readonly positionUnavailableErrorMsg = 'O sinal de GPS não consegue alcançar sua posição no momento.'
   readonly positionMissingErrorMsg = 'O seu dispositivo não suporta busca a partir do GPS.';
+
+  readonly positionIcon = faLocationPin;
 
   private _weatherService = inject(WeatherService);
   private _geolocationService = inject(GeolocationService);

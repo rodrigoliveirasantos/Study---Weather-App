@@ -1,10 +1,14 @@
 <ng-container *ngIf="vm$ | async as vm">
-  <app-weather-form
-    [(cityName)]="cityName"
-    (onSubmit)="handleSubmit()"
-  ></app-weather-form>
+  <header class="container">
+    <button (click)="handleCoordsBtnClick()">
+      <fa-icon [icon]="positionIcon" />
+    </button>
 
-  <button (click)="handleCoordsBtnClick()">Buscar na minha localização</button>
+    <app-weather-form
+      [(cityName)]="cityName"
+      (submit)="handleSubmit()"
+    ></app-weather-form>
+  </header>
 
   <ng-container *ngIf="!vm.loading; else loader">
     <div *ngIf="vm.error">
