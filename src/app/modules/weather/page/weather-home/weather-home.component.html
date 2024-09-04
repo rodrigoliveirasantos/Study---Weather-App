@@ -20,7 +20,7 @@
         </div>
 
         <app-weather-card
-          *ngIf="vm.weatherData"
+          *ngIf="!vm.error && vm.weatherData"
           [weatherReport]="vm.weatherData"
         ></app-weather-card>
       </ng-container>
