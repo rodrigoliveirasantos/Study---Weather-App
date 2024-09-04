@@ -22,6 +22,7 @@ input[type="text"] {
 
 
 .container {
+  width: 100%;
   max-width: config.$container-max-width;
   margin-inline: auto;
   padding: 0 2.4rem;

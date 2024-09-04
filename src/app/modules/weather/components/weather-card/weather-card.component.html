@@ -1,9 +1,5 @@
 <div class="container" *ngIf="weatherReport">
-  <app-weather-card-header
-    [cityName]="weatherReport.name"
-    [temp]="weatherReport.main.temp"
-    [tempFeelsLike]="weatherReport.main.feels_like"
-  ></app-weather-card-header>
+  <app-weather-card-header [report]="weatherReport"></app-weather-card-header>
 
   <div class="info-container">
     <app-weather-card-info

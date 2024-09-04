@@ -1,11 +1,10 @@
 <header>
-  <h2>{{ cityName }}</h2>
+  <h2>{{ report.name }}</h2>
 
   <fa-icon [icon]="sunIcon"></fa-icon>
 
-  <div class="temperature">{{ temp | temperature }}</div>
-
-  <small class="feels-like">
-    Sensação térmica: {{ tempFeelsLike | temperature }}
-  </small>
+  <p class="temperature">{{ report.main.temp | temperature }}</p>
+  <p class="description">
+    {{ report.weather[0].description }}
+  </p>
 </header>

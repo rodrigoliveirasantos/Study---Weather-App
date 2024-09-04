@@ -1,31 +1,30 @@
 <ng-container *ngIf="vm$ | async as vm">
-  <app-weather-bg
-    [condition]="vm.condition"
-    style="z-index: -1"
-  ></app-weather-bg>
+  <app-weather-bg [condition]="vm.condition"></app-weather-bg>
 
-  <header class="container">
-    <button app-button (click)="handleCoordsBtnClick()" variant="icon">
-      <fa-icon [icon]="positionIcon" size="lg" />
-    </button>
+  <div class="foreground">
+    <header class="container">
+      <button app-button (click)="handleCoordsBtnClick()" variant="icon">
+        <fa-icon [icon]="positionIcon" size="lg" />
+      </button>
 
-    <app-weather-form
-      [(cityName)]="cityName"
-      (onSubmit)="handleSubmit()"
-    ></app-weather-form>
-  </header>
+      <app-weather-form
+        [(cityName)]="cityName"
+        (onSubmit)="handleSubmit()"
+      ></app-weather-form>
+    </header>
 
-  <div class="content">
-    <ng-container *ngIf="!vm.loading; else loader">
-      <div *ngIf="vm.error">
-        {{ vm.error }}
-      </div>
+    <div class="container">
+      <ng-container *ngIf="!vm.loading; else loader">
+        <div *ngIf="vm.error">
+          {{ vm.error }}
+        </div>
 
-      <app-weather-card
-        *ngIf="vm.weatherData"
-        [weatherReport]="vm.weatherData"
-      ></app-weather-card>
-    </ng-container>
+        <app-weather-card
+          *ngIf="vm.weatherData"
+          [weatherReport]="vm.weatherData"
+        ></app-weather-card>
+      </ng-container>
+    </div>
   </div>
 </ng-container>
 

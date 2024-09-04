@@ -9,9 +9,7 @@ import { WeatherReport } from 'src/app/models/interface/weather';
 })
 export class WeatherCardHeaderComponent implements OnInit {
 
-  @Input() cityName!: string;
-  @Input() temp!: WeatherReport['main']['temp'];
-  @Input() tempFeelsLike!: WeatherReport['main']['feels_like'];
+  @Input() report!: WeatherReport
 
   sunIcon = faSun;
 
