@@ -1,9 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { faSun } from '@fortawesome/free-solid-svg-icons';
 import { WeatherReport } from 'src/app/models/interface/weather';
 
 @Component({
   selector: 'app-weather-card-header',
   templateUrl: './weather-card-header.component.html',
+  styleUrls: ['./weather-card-header.component.scss']
 })
 export class WeatherCardHeaderComponent implements OnInit {
 
@@ -11,16 +13,7 @@ export class WeatherCardHeaderComponent implements OnInit {
   @Input() temp!: WeatherReport['main']['temp'];
   @Input() tempFeelsLike!: WeatherReport['main']['feels_like'];
 
-  /* Imagens */
-
-  sunImg = {
-    src: '/assets/img/sun.jpg',
-    alt: 'Céu claro e ensolarado.'
-  };
-  coldImg = {
-    src: '/assets/img/cold.jpg',
-    alt: 'Floresta com pinheiros. Gramados e árvore estão cobertos por neve.'
-  }
+  sunIcon = faSun;
 
   constructor() { }
 

@@ -1,4 +1,13 @@
-@mixin padding-y($value) {
-  padding-top: $value;
-  padding-bottom: $value;
+@mixin padding-y($top, $bottom: $top) {
+  padding-top: $top;
+  padding-bottom: $bottom;
+}
+
+@mixin padding-x($start, $end: $start) {
+  padding-inline: $start $end;
+}
+
+@mixin size($w, $h: $w) {
+  width: $w;
+  height: $h;
 }

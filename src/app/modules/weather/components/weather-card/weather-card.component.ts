@@ -6,6 +6,7 @@ import { WeatherReport } from 'src/app/models/interface/weather';
 @Component({
   selector: 'app-weather-card',
   templateUrl: './weather-card.component.html',
+  styleUrls: ['./weather-card.styles.scss']
 })
 export class WeatherCardComponent {
   @Input() weatherReport!: WeatherReport;

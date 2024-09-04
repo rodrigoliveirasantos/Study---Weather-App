@@ -1,10 +1,24 @@
+@use '/src/styles/mixins' as *;
+
+:host {
+  display: grid;
+  grid-template-rows: min-content 1fr;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  gap: 3.2rem;
+  min-height: 100vh;
+  min-height: 100dvh;
+  @include padding-y(4rem);
+}
+
 header {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 1.6rem;
+  width: 100%;
 
   app-weather-form {
-    flex: 0 1 36ch;
+    flex: 1;
   }
 }

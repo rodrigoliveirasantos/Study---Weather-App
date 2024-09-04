@@ -1,0 +1,18 @@
+@use '/src/styles/mixins' as *;
+
+header {
+  text-align: center;
+}
+
+h2 {
+  font-weight: 500;
+}
+
+fa-icon {
+  font-size: 12.8rem;
+}
+
+.temperature {
+  font-size: 4rem;
+  font-weight: bold;
+}

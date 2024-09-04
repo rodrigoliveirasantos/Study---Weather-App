@@ -1,0 +1,12 @@
+app-weather-card-header {
+  display: block;
+  margin-bottom: 3.2rem;
+}
+
+app-weather-card-info {
+  display: block;
+
+  & + & {
+    margin-top: 1.6rem;
+  }
+}

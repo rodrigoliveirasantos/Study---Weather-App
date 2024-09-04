@@ -1,14 +1,10 @@
 @use 'styles/base';
-@use 'styles/config';
 
+@use 'styles/config';
 @use 'styles/mixins' as *;
 
 [disabled] {
   opacity: 0.5;
-}
-
-body {
-  @include padding-y(4rem);
 }
 
 input {

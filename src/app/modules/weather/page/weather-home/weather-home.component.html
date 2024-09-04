@@ -10,16 +10,18 @@
     ></app-weather-form>
   </header>
 
-  <ng-container *ngIf="!vm.loading; else loader">
-    <div *ngIf="vm.error">
-      {{ vm.error }}
-    </div>
+  <div class="content">
+    <ng-container *ngIf="!vm.loading; else loader">
+      <div *ngIf="vm.error">
+        {{ vm.error }}
+      </div>
 
-    <app-weather-card
-      *ngIf="vm.weatherData"
-      [weatherReport]="vm.weatherData"
-    ></app-weather-card>
-  </ng-container>
+      <app-weather-card
+        *ngIf="vm.weatherData"
+        [weatherReport]="vm.weatherData"
+      ></app-weather-card>
+    </ng-container>
+  </div>
 </ng-container>
 
 <ng-template #loader>

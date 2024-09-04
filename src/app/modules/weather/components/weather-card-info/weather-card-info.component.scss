@@ -1,0 +1,18 @@
+dl {
+  display: flex;
+  justify-content: space-between;
+}
+
+/*
+* 1. Normaliza o tamanho dos ícones para o texto ficar
+* alinhado.
+*/
+.icon {
+  display: inline-block;
+  width: 1.5em; /* 1 */
+  margin-right: 0.5em;
+}
+
+dd {
+  font-weight: bold;
+}
