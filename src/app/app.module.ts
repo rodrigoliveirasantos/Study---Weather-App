@@ -13,6 +13,7 @@ import { WeatherCardComponent } from './modules/weather/components/weather-card/
 import { WeatherCardHeaderComponent } from './modules/weather/components/weather-card-header/weather-card-header.component';
 import { WeatherCardInfoComponent } from './modules/weather/components/weather-card-info/weather-card-info.component';
 import { TemperaturePipe } from './modules/shared/pipes/temperature/temperature.pipe';
+import { ButtonComponentModule } from './modules/shared/components/button/button.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { TemperaturePipe } from './modules/shared/pipes/temperature/temperature.
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    ButtonComponentModule
   ],
   providers: [],
   bootstrap: [AppComponent]
