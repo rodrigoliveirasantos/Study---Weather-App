@@ -67,7 +67,7 @@ export class WeatherHomeComponent implements OnDestroy {
 
   condition$: Observable<WeatherConditionTypes> = merge(
     this.error$.pipe(map(() => WeatherConditionTypes.None)),
-    this.weatherData$.pipe(map((report) => this.getCondition(report)),)
+    this.weatherData$.pipe(map((report) => this.getCondition(report)))
   );
 
   loadingWeatherData$ = merge(

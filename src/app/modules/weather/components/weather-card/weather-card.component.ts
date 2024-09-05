@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { faCloud, faDroplet, faTemperatureHigh, faTemperatureLow, faWind } from '@fortawesome/free-solid-svg-icons';
 import { WeatherReport } from 'src/app/models/interface/weather';
+import { WeatherConditionTypes } from '../../types';
 
 
 @Component({
@@ -10,6 +11,7 @@ import { WeatherReport } from 'src/app/models/interface/weather';
 })
 export class WeatherCardComponent {
   @Input() weatherReport!: WeatherReport;
+  @Input() conditon!: WeatherConditionTypes;
 
   /* Icones */
   minTempIcon = faTemperatureLow;

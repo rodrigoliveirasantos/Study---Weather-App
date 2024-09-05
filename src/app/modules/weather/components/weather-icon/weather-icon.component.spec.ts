@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { WeatherCardHeaderComponent } from './weather-card-header.component';
+import { WeatherIconComponent } from './weather-icon.component';
 
-describe('WeatherCardHeaderComponent', () => {
-  let component: WeatherCardHeaderComponent;
-  let fixture: ComponentFixture<WeatherCardHeaderComponent>;
+describe('WeatherIconComponent', () => {
+  let component: WeatherIconComponent;
+  let fixture: ComponentFixture<WeatherIconComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WeatherCardHeaderComponent ]
+      declarations: [ WeatherIconComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(WeatherCardHeaderComponent);
+    fixture = TestBed.createComponent(WeatherIconComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -27,6 +27,7 @@
         <app-weather-card
           *ngIf="!vm.error && vm.weatherData"
           [weatherReport]="vm.weatherData"
+          [conditon]="vm.condition"
         ></app-weather-card>
       </ng-container>
     </div>

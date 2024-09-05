@@ -1,5 +1,14 @@
 <div class="container" *ngIf="weatherReport">
-  <app-weather-card-header [report]="weatherReport"></app-weather-card-header>
+  <header>
+    <h2>{{ weatherReport.name }}</h2>
+
+    <app-weather-icon [condition]="conditon"></app-weather-icon>
+
+    <p class="temperature">{{ weatherReport.main.temp | temperature }}</p>
+    <p class="description">
+      {{ weatherReport.weather[0].description }}
+    </p>
+  </header>
 
   <div class="info-container">
     <app-weather-card-info

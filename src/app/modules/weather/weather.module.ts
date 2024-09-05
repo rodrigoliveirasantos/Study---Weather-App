@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { WeatherCardHeaderComponent } from "./components/weather-card-header/weather-card-header.component";
+
 import { WeatherCardInfoComponent } from "./components/weather-card-info/weather-card-info.component";
 import { WeatherCardComponent } from "./components/weather-card/weather-card.component";
 import { WeatherFormComponent } from "./components/weather-form/weather-form.component";
@@ -11,15 +11,16 @@ import { ButtonComponentModule } from "../shared/components/button/button.compon
 import { TemperaturePipeModule } from "../shared/pipes/temperature/temperature.pipe";
 import { CommonModule } from "@angular/common";
 import { WeatherBgComponent } from "./components/weather-bg/weather-bg.component";
+import { WeatherIconComponent } from "./components/weather-icon/weather-icon.component";
 
 @NgModule({
   declarations: [
     WeatherHomeComponent,
     WeatherFormComponent,
     WeatherCardComponent,
-    WeatherCardHeaderComponent,
     WeatherCardInfoComponent,
-    WeatherBgComponent
+    WeatherBgComponent,
+    WeatherIconComponent
   ],
   imports: [
     CommonModule,
