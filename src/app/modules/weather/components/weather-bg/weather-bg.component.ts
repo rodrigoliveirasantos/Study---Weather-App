@@ -8,7 +8,7 @@ import { WeatherConditionTypes } from '../../types';
   styleUrls: ['./weather-bg.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class WeatherBgComponent implements OnDestroy {
+export class WeatherBgComponent {
   readonly bgByCondition = new Map<WeatherConditionTypes, string[]>([
     [WeatherConditionTypes.Clear, ['#3FD8ED', '#10A4C5']],
     [WeatherConditionTypes.Rain, ['#284E7B', '#0D2F57']],
@@ -20,12 +20,8 @@ export class WeatherBgComponent implements OnDestroy {
   ]);
 
   @Input() set condition(value: WeatherConditionTypes) {
-    this.condition$.next(this.bgByCondition.has(value) ? value : WeatherConditionTypes.None);
+    this._condition = this.bgByCondition.has(value) ? value : WeatherConditionTypes.None;
   };
 
-  condition$ = new BehaviorSubject(WeatherConditionTypes.None);
-
-  ngOnDestroy(): void {
-    this.condition$.complete();
-  }
+  _condition = WeatherConditionTypes.None;
 }
