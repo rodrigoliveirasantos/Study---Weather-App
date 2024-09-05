@@ -1,10 +1,11 @@
 import { Component, inject, OnDestroy } from '@angular/core';
 import { WeatherService } from '../../services/weather/weather.service';
-import { combineLatest, filter, map, merge, share, shareReplay, startWith, Subject, switchMap, takeUntil, tap } from 'rxjs';
+import { combineLatest, filter, map, merge, Observable, share, shareReplay, startWith, Subject, switchMap, takeUntil, tap } from 'rxjs';
 import { GeolocationService } from '../../services/geolocation/geolocation.service';
 import { GeolocationGetPositionResult } from 'src/app/models/classes/GeolocationGetPositionResult';
 import { faLocation, faLocationPin, faMapPin } from '@fortawesome/free-solid-svg-icons';
 import { WeatherReport } from 'src/app/models/interface/weather';
+import { WeatherConditionTypes } from '../../types';
 
 @Component({
   selector: 'app-weather-home',
@@ -64,13 +65,10 @@ export class WeatherHomeComponent implements OnDestroy {
     )
   )
 
-  condition$ = merge(
-    this.error$.pipe(map(() => '')),
-    this.weatherData$.pipe(
-      map((report) => report ? this.getCondition(report) : ''),
-      tap(console.log)
-    )
-  )
+  condition$: Observable<WeatherConditionTypes> = merge(
+    this.error$.pipe(map(() => WeatherConditionTypes.None)),
+    this.weatherData$.pipe(map((report) => this.getCondition(report)),)
+  );
 
   loadingWeatherData$ = merge(
     this.weatherDataQuery$.pipe(map(() => true)),
@@ -81,7 +79,7 @@ export class WeatherHomeComponent implements OnDestroy {
     weatherData: this.weatherData$.pipe(startWith(false as const)),
     loading: this.loadingWeatherData$.pipe(startWith(false)),
     error: this.error$.pipe(startWith('')),
-    condition: this.condition$.pipe(startWith(''))
+    condition: this.condition$.pipe(startWith(WeatherConditionTypes.None))
   });
 
   handleCoordsBtnClick() {
@@ -110,34 +108,38 @@ export class WeatherHomeComponent implements OnDestroy {
     }
   }
 
-  getCondition({ weather }: WeatherReport) {
-    switch (weather[0].main) {
+  getCondition(report: WeatherReport | false): WeatherConditionTypes {
+    if (!report) {
+      return WeatherConditionTypes.None;
+    }
+
+    switch (report.weather[0].main) {
       case 'Ash':
       case 'Fog':
       case 'Mist':
       case 'Dust':
       case 'Sand':
       case 'Smoke':
-        return 'Fog';
+        return WeatherConditionTypes.Fog;
 
       case 'Clouds':
-        return 'Clouds';
+        return WeatherConditionTypes.Clouds;
 
       case 'Rain':
       case 'Drizzle':
-        return 'Rain';
+        return WeatherConditionTypes.Rain;
 
       case 'Snow':
-        return 'Snow';
+        return WeatherConditionTypes.Snow;
 
       case 'Thunderstorm':
       case 'Squall':
-        return 'Thunderstorm'
+        return WeatherConditionTypes.Thunderstorm;
 
       case 'Clear':
       case 'Tornado':
       default:
-        return 'Clear';
+        return WeatherConditionTypes.Clear;
     }
   }
 
