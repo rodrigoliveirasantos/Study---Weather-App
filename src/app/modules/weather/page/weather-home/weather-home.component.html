@@ -3,7 +3,12 @@
 
   <div class="foreground">
     <header class="container">
-      <button app-button (click)="handleCoordsBtnClick()" variant="icon">
+      <button
+        app-button
+        (click)="handleCoordsBtnClick()"
+        variant="icon"
+        title="Usar localização atual"
+      >
         <fa-icon [icon]="positionIcon" size="lg" />
       </button>
 
