@@ -23,6 +23,16 @@ Aplicação básica para acompanhamento da temperatura local.
 
 ## Instalação e execução:
 
+### Obtendo o token de api do OpenWeather:
+
+Este projeto usa a API do OpenWeather para buscar as informações de clima,
+o qual exige uma chave para o consumo. 
+
+1. Visite o site da [OpenWeather](https://openweather.co.uk/);
+2. Clique em Sign-in e realize o processo de criação de conta;
+3. Visite o painel da conta e vá na aba [API Keys](https://home.openweather.co.uk/api_keys)
+4. A chave poderá ser obtida la. Note que em novas contas, a chave de API pode demorar algumas horas para poder ser usada.
+
 ### Configuração do ambiente:
 
 1. Copie o arquivo `src/environments/environment.example.ts` e cole na mesma pasta renomeando para `environment.development.ts`, caso esteja rodando em ambiente em desenvolvimento ou `enviroment.production.ts`, caso deseje buildar para produção.
