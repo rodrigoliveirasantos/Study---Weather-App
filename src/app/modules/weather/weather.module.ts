@@ -12,6 +12,7 @@ import { TemperaturePipeModule } from "../shared/pipes/temperature/temperature.p
 import { CommonModule } from "@angular/common";
 import { WeatherBgComponent } from "./components/weather-bg/weather-bg.component";
 import { WeatherIconComponent } from "./components/weather-icon/weather-icon.component";
+import { LoaderComponentModule } from "../shared/components/loader/loader.component";
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { WeatherIconComponent } from "./components/weather-icon/weather-icon.com
     FormsModule,
     FontAwesomeModule,
     ButtonComponentModule,
-    TemperaturePipeModule
+    TemperaturePipeModule,
+    LoaderComponentModule
   ],
   exports: []
 })

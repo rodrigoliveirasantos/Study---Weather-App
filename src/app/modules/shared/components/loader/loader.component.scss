@@ -1,0 +1,46 @@
+$icons: 3;
+$icon-size: 2.4rem;
+
+$pulse-force: 0.7;
+$pulse-scale: 0.1;
+$pulse-delay-between-childs: 80ms;
+$pulse-duration: 800ms;
+
+
+@keyframes pulse {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  to {
+    opacity: 1 - $pulse-force;
+    transform: scale(#{1 + $pulse-scale});
+  }
+}
+
+
+:host {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: $icon-size + 0.8rem;
+  place-items: center;
+  font-size: $icon-size;
+  gap: 0.8em;
+
+  & > * {
+    animation: pulse $pulse-duration ease-in-out alternate infinite;
+
+    @for $i from 1 through $icons {
+     &:nth-child(#{$i}) {
+        animation-delay: ($i - 1) * $pulse-delay-between-childs;
+      }
+    }
+  }
+
+
+}
+
+
+
+
