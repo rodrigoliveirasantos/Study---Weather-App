@@ -15,6 +15,10 @@
   @include padding-y(4rem);
 }
 
+.error {
+  text-align: center;
+}
+
 header {
   display: flex;
   justify-content: center;

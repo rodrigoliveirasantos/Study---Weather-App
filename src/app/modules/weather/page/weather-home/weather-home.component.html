@@ -20,8 +20,8 @@
 
     <div class="container">
       <ng-container *ngIf="!vm.loading; else loader">
-        <div *ngIf="vm.error">
-          {{ vm.error }}
+        <div class="error" *ngIf="vm.error">
+          <b>{{ vm.error }}</b>
         </div>
 
         <app-weather-card
